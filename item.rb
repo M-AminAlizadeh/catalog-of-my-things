@@ -10,15 +10,16 @@ class Item
     @archived = archived
   end
 
-  def can_be_archive(publish_date)
-    date = Date.today.to_s.to_i - publish_date.to_i
-    return unless date > 10
-
+  def can_be_archived?(publish_date)
+    current_year = Date.today.year
+    published_year = publish_date.to_i
+    check_diff = current_year - published_year
+    return unless check_diff > 10
     true
   end
 
   def move_to_archive
-    return unless can_be_archive
+    return unless can_be_archived?
 
     @archived = true
   end
