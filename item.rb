@@ -15,6 +15,7 @@ class Item
     published_year = publish_date.to_i
     check_diff = current_year - published_year
     return unless check_diff > 10
+
     true
   end
 
