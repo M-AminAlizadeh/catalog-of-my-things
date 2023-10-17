@@ -1,5 +1,4 @@
 require_relativev 'item'
-require 'date'
 
 class MusicAlbum < Item
   attr_accessor :on_spotify
