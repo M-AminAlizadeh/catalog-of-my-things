@@ -1,5 +1,14 @@
 class Author
-  def test_method
-    puts 'Method from Author class'
+  attr_accessor :first_name, :last_name
+
+  def initialize(first_name, last_name)
+    @id = Random.rand(1..1000)
+    @first_name = first_name
+    @last_name = last_name
+    @items = []
   end
+
+  private
+
+  attr_reader :id, :items
 end
