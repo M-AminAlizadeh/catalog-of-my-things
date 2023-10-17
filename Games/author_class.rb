@@ -1,5 +1,6 @@
 class Author
-  attr_accessor :first_name, :last_name
+  attr_accessor :first_name, :last_name, :items
+  attr_reader :id
 
   def initialize(first_name, last_name)
     @id = Random.rand(1..1000)
@@ -12,9 +13,4 @@ class Author
     item.author = self
     @items << item unless @items.include?(item)
   end
-
-  private
-
-  attr_reader :id
-  attr_accessor :items
 end
