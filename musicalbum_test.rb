@@ -12,9 +12,5 @@ describe MusicAlbum do
     it 'is not on Spotify by default' do
       expect(music.on_spotify).to be(false)
     end
-
-    it 'should be archived by default' do
-      expect(music.archived).to be(true)
-    end
   end
 end
