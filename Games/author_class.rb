@@ -8,7 +8,13 @@ class Author
     @items = []
   end
 
+  def add_item(item)
+    item.author = self
+    @items << item unless @items.include?(item)
+  end
+
   private
 
-  attr_reader :id, :items
+  attr_reader :id
+  attr_accessor :items
 end
