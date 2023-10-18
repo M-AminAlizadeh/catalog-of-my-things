@@ -1,6 +1,6 @@
 require 'rspec'
-require_relative '../classes/genre'
-require_relative '../classes/item'
+require_relative 'genre'
+require_relative 'item'
 
 describe Genre do
   before(:each) { @genre = Genre.new(88, 'Heavy metal') }
