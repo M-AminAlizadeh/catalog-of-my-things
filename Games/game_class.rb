@@ -1,4 +1,4 @@
-require_relative './item'
+require './item'
 
 class Game < Item
   attr_accessor :multiplayer, :last_played_at
@@ -11,7 +11,7 @@ class Game < Item
 
   # private
 
-  def can_be_archived?
-    super && (Date.today - Date.parse(@last_played_at)).to_i / 365 >= 2
+  def can_be_archived?(item)
+    super(item) && (Date.today - Date.parse(@last_played_at)).to_i / 365 >= 2
   end
 end

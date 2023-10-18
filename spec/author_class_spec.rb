@@ -1,4 +1,4 @@
-require_relative '../classes/author_class'
+require_relative '../Games/author_class'
 require 'rspec'
 
 describe Author do
