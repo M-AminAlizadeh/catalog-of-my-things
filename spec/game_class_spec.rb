@@ -1,5 +1,5 @@
-require_relative '../Games/game_class'
-require_relative '../item'
+require_relative '../classes/item'
+require_relative '../classes/game_class'
 require 'rspec'
 
 describe Game do
