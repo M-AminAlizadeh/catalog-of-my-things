@@ -1,6 +1,6 @@
 require 'rspec'
-require_relative '../classes/book'
-require_relative '../classes/item'
+require_relative '../book'
+require_relative '../item'
 
 describe Book do
   let(:book) { Book.new('2023-10-17', 'Wiley', 'good') }
