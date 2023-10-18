@@ -1,7 +1,7 @@
 require 'rspec'
-require_relative 'musicalbum'
-require_relative 'genre'
-require_relative 'item'
+require_relative '../musicalbum'
+require_relative '../genre'
+require_relative '../classes/item'
 
 describe MusicAlbum do
   before(:each) do
