@@ -20,7 +20,7 @@
 # 📖 Catalouge-of-things <a name="about-project"></a>
 
 
-**Catalouge-of-things** is a Console application where a user can see and access the data present. User will be given a choice to select from different operations present like creating a book, music album, game and listing the current data about these entities.
+**Catalouge-of-things** is a Console application where a user can see and access the data present. User will be given a choice to select from different operations present like creating a book, music album, game and listing the current data about these entities. for more information watch this video [link](https://drive.google.com/file/d/1GVbdixx1rfKX-mnRHiJbOF1xwFq3vtwF/view?usp=share_link)
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -47,7 +47,7 @@ This project is built with Ruby.
 To get a local copy up and running, follow these steps.
 1. Clone this repository
    run 
-  > `git clone https://github.com/M-AminAlizadeh/catalog-of-my-things.git`
+> `git clone https://github.com/M-AminAlizadeh/catalog-of-my-things.git`
 
 2. Open the project in a text editor
 3. Run `bundle install` to install all project dependencies
