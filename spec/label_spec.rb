@@ -1,5 +1,5 @@
 require 'rspec'
-require_relative '../classes/label'
+require_relative '../classes/label_class'
 require_relative '../classes/item'
 
 describe Label do
