@@ -16,7 +16,6 @@ module GenreList
     puts 'successfully ADDED!!'
     puts '-----------------------------------'
     genre
-    
   end
 
   def list_genres

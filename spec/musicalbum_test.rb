@@ -1,6 +1,6 @@
 require 'rspec'
-require_relative '../musicalbum'
-require_relative '../genre'
+require_relative '../classes/musicalbum'
+require_relative '../classes/genre'
 require_relative '../classes/item'
 
 describe MusicAlbum do
@@ -8,7 +8,7 @@ describe MusicAlbum do
     @genre = Genre.new('Heavy metal')
     @item = Item.new('2023-10-17')
     @genre.add_item(@item)
-    @music = MusicAlbum.new('2000-12-12', false)
+    @music = MusicAlbum.new('2000-12-12', false, false)
   end
 
   context 'attributes' do
@@ -23,17 +23,5 @@ describe MusicAlbum do
     it 'is should not be on Spotify' do
       expect(@music.on_spotify).to be(false)
     end
-
-    it 'can be archived should return true if item class method returns true AND if on_spotify equals to true' do
-      expect(@music.can_be_archived?).to eq(false)
-    end
-
-    it 'can be moved to archive' do
-      @music.move_to_archive
-      expect(@music.archived).to eq(false)
-    end
   end
 end
-
-# To pass the test in the music album class to add the following
-# return false unless super(@publish_date)

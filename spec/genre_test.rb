@@ -3,7 +3,7 @@ require_relative '../classes/genre'
 require_relative '../classes/item'
 
 describe Genre do
-  before(:each) { @genre = Genre.new(88, 'Heavy metal') }
+  before(:each) { @genre = Genre.new('Heavy metal') }
 
   context 'attributes' do
     it 'has a name' do
@@ -35,6 +35,3 @@ describe Genre do
     end
   end
 end
-
-# to pass the test in the item.rb class to add
-#   attr_accessor :genre
