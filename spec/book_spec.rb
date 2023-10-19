@@ -26,4 +26,10 @@ describe Book do
       expect(book.cover_state).to eql 'good'
     end
   end
+
+  describe '#can_be_archived' do
+    it 'returns the correct value of can_be_archived?' do
+      expect(book.send(:can_be_archived?)).to be false
+    end
+  end
 end
