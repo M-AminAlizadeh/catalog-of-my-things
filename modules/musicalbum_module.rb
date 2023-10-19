@@ -14,7 +14,8 @@ module Albumlogic
         music_album_data = JSON.parse(line)
         new_album = MusicAlbum.new(music_album_data['publish_date'], music_album_data['archived'],
                                    music_album_data['on_spotify'])
-        puts "Published: \"#{new_album.publish_date}\", Archived: #{new_album.archived}, On Spotify: #{new_album.on_spotify}"
+        print "Published: \"#{new_album.publish_date}\", "
+        puts "Archived: #{new_album.archived}, On Spotify: #{new_album.on_spotify}"
         puts '-----------------------------------'
       end
     else
@@ -22,31 +23,32 @@ module Albumlogic
     end
   end
 
+  def get_user_input(message)
+    print message
+    gets.chomp
+  end
+
+  def check_archived(archived)
+    if archived
+      puts 'Album moved to archive.'
+    else
+      puts 'Album not archived.'
+    end
+  end
+
   def create_music_album
-    puts 'Is the album on Spotify? [Y/N]?'
-    on_spotify = gets.chomp.downcase == 'y'
-
-    puts 'Please enter the date of publish [YYYY-MM-DD]'
-    publish_date = gets.chomp
-
+    on_spotify = get_user_input('Is the album on Spotify? [Y/N]? ').casecmp('Y').zero?
+    publish_date = get_user_input('Please enter the date of publish [YYYY-MM-DD] ')
     if MusicAlbum.can_be_archived?(publish_date, on_spotify)
-      puts 'Would you like to archive it [Y/N]?'
-      archive_response = gets.chomp.downcase
+      archive_response = get_user_input('Would you like to archive it [Y/N]? ').casecmp('Y').zero?
       archived = archive_response == 'y'
-
-      if archived
-        puts 'Album moved to archive.'
-      else
-        puts 'Album not archived.'
-      end
+      check_archived(archived)
     else
       archived = false
-      puts 'Album cannot be moved to archive.'
     end
     label = create_label
     genre = creating_genre
     author = add_author
-
     music_album = MusicAlbum.new(publish_date, archived, on_spotify: on_spotify)
     music_album.label = label
     music_album.genre = genre
