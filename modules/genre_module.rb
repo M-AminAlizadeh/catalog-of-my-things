@@ -8,6 +8,7 @@ module GenreList
     genre_name = gets.chomp
 
     if genres.any? { |genre| genre.name == genre_name }
+      puts 'Genre exists'
     else
       genre = Genre.new(genre_name)
       genres.push(genre)

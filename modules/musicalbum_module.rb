@@ -20,7 +20,7 @@ module Albumlogic
     puts 'Please enter the date of publish [YYYY-MM-DD]'
     publish_date = gets.chomp
 
-    if MusicAlbum.can_be_archived?(publish_date, on_spotify)
+    if MusicAlbum.can_be_archived?(publish_date)
       puts 'Would you like to archive it [Y/N]?'
       archive_response = gets.chomp.downcase
       archived = archive_response == 'y'
