@@ -1,48 +1,49 @@
-require './app'
+require_relative 'app'
 
 class Main
   def initialize
     @app = App.new
+    prompt
   end
-  # rubocop:disable Metrics/CyclomaticComplexity
 
-  def run
-    puts "\nCatalog of my things\n"
+  def take_input
+    print 'Enter a number: '
+    option = gets.chomp.to_i
+    while option.nil? || option < 1 || option > 13
+      puts 'Please enter a number between 1 and 13!'
+      print 'Enter a number: '
+      option = gets.chomp.to_i
+    end
+    option
+  end
+
+  def prompt
+    puts 'Welcome'
     loop do
-      print_user_options
-      choice = gets.chomp.to_i
-      break if choice == 10
+      display_options
+      option = self.take_input
+      @app.run(option)
 
-      case choice
-      when 1 then @app.list_all_books
-      when 2 then @app.list_all_music_albums
-      when 3 then @app.list_all_movies
-      when 4 then @app.list_all_music_genres
-      when 5 then @app.list_all_labels
-      when 6 then @app.list_authors
-      when 7 then @app.add_book
-      when 8 then @app.add_music_album
-      when 9 then @app.add_movie
-      else
-        puts 'Error: Invalid number.'
-      end
+      break if option == 13
     end
   end
-  # rubocop:enable Metrics/CyclomaticComplexity
 
-  def print_user_options
-    print "\nPlease choose an option by entering a number:\n"
-    print "1. List all books\n"
-    print "2. List all music albums\n"
-    print '3. List all games'
-    print "4. List all music genres\n"
-    print "5. List all labels\n"
-    print "6. List all authors\n"
-    print "7. Add a book\n"
-    print "8. Add a music album\n"
-    print "9. Add a Game\n"
-    print "10. Exit\n\n"
+  def display_options
+    puts 'Please choose one of the options: '
+    puts '1. - List all books'
+    puts '2. - List all music albums'
+    puts '3. - List games'
+    puts '4. - List all genres'
+    puts '5. - List all labels'
+    puts '6. - List all authors'
+    puts '7. - Create a book'
+    puts '8. - Create a music album'
+    puts '9. - Create a game'
+    puts '10. - Create a genre'
+    puts '11. - Create a label'
+    puts '12. - Create a author'
+    puts '13. - Exit 👋'
   end
 end
 
-Main.new.run
+Main.new
