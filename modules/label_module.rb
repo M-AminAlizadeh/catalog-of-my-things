@@ -2,10 +2,10 @@ require_relative '../classes/label_class'
 
 module LabelModule
   def create_label
-    print 'title:'
+    print 'Label Title: '
     title = gets.chomp
 
-    print 'color:'
+    print 'Label Color: '
     color = gets.chomp
 
     new_label = Label.new(title, color)
