@@ -16,17 +16,18 @@ class Main
       case choice
       when 1 then @app.list_all_books
       when 2 then @app.list_all_music_albums
-      when 3 then @app.list_all_movies
+      when 3 then @app.list_all_games
       when 4 then @app.list_all_music_genres
       when 5 then @app.list_all_labels
       when 6 then @app.list_authors
       when 7 then @app.add_book
       when 8 then @app.add_music_album
-      when 9 then @app.add_movie
+      when 9 then @app.add_game
       else
         puts 'Error: Invalid number.'
       end
     end
+    @app.save_files_data
   end
   # rubocop:enable Metrics/CyclomaticComplexity
 
