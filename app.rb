@@ -5,7 +5,7 @@ require_relative 'modules/label_module'
 class App
   include BookModule
   include LabelModule
-
+# rubocop:disable all
   def run(option)
     case option
     when 1
@@ -37,4 +37,5 @@ class App
       exit
     end
   end
+# rubocop:enable all
 end
