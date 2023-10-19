@@ -53,14 +53,14 @@ module Albumlogic
       }
     end
 
-    filename = 'music_albums.json'
+    filename = 'data/music_albums.json'
     File.open(filename, 'w') do |file|
       file.puts(JSON.generate(music))
     end
   end
 
   def onload_album_data(music)
-    filename = 'music_albums.json'
+    filename = 'data/music_albums.json'
 
     return unless File.exist?(filename)
 

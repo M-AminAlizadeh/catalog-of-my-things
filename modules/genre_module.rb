@@ -42,14 +42,14 @@ module GenreList
       }
     end
 
-    filename = 'genres.json'
+    filename = 'data/genres.json'
     File.open(filename, 'w') do |file|
       file.puts(JSON.generate(genres))
     end
   end
 
   def onload_genre_data(genres)
-    filename = 'genres.json'
+    filename = 'data/genres.json'
 
     return unless File.exist?(filename)
 
