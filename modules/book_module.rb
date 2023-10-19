@@ -1,6 +1,9 @@
 require_relative '../classes/book'
+require_relative 'label_module'
 
 module BookModule
+  include LabelModule
+
   def create_book
     print 'Published date (yyyy-mm-dd): '
     publish_date = gets.chomp
@@ -11,16 +14,14 @@ module BookModule
     print 'Cover state (good/bad): '
     cover_state = gets.chomp
 
+    create_label
+
     new_book = Book.new(publish_date, publisher, cover_state)
 
     # Save
     File.open('data/books.json', 'a') do |file|
       file.puts new_book.to_json
     end
-
-    puts '-----------------------------------'
-    puts 'successfully ADDED!!'
-    puts '-----------------------------------'
   end
 
   def list_of_books
