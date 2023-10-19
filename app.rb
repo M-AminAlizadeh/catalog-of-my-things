@@ -25,7 +25,7 @@ class App
   def list_all_games; end
 
   def list_all_genres
-    list_genres
+    list_genres(genres)
   end
 
   def list_all_labels; end

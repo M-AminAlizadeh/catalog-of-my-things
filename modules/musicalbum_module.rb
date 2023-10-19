@@ -29,7 +29,7 @@ module Albumlogic
       puts 'Album cannot be moved to archive.'
     end
 
-    creating_genre
+    creating_genre(genres)
     # create author
     # creat label
 
