@@ -1,5 +1,5 @@
-require_relative 'item'
 require 'json'
+require_relative 'item'
 
 class Game < Item
   attr_accessor :multiplayer, :last_played_at, :id
@@ -11,8 +11,6 @@ class Game < Item
     @last_played_at = last_played_at
     @publish_date = publish_date
   end
-
-  # private
 
   def can_be_archived?
     self.class.can_be_archived?(@publish_date) && (Date.today - Date.parse(@last_played_at)).to_i / 365 >= 2
