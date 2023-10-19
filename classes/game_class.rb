@@ -1,17 +1,30 @@
 require_relative 'item'
+require 'json'
 
 class Game < Item
-  attr_accessor :multiplayer, :last_played_at
+  attr_accessor :multiplayer, :last_played_at, :id
 
-  def initialize(multiplayer, last_played_at, publish_date: nil)
+  def initialize(multiplayer, last_played_at, publish_date)
     super(publish_date)
+    @id = Random.rand(1..1000)
     @multiplayer = multiplayer
     @last_played_at = last_played_at
+    @publish_date = publish_date
   end
 
   # private
 
   def can_be_archived?
-    super && (Date.today - Date.parse(@last_played_at)).to_i / 365 >= 2
+    self.class.can_be_archived?(@publish_date) && (Date.today - Date.parse(@last_played_at)).to_i / 365 >= 2
+  end
+
+  def to_json(option = {})
+    {
+      id: @id,
+      multiplayer: @multiplayer,
+      last_played_at: @last_played_at,
+      publish_date: @publish_date,
+      archived: @archived
+    }.to_json(option)
   end
 end

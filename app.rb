@@ -3,16 +3,23 @@ require_relative 'modules/genre_module'
 require_relative 'modules/musicalbum_module'
 require_relative 'classes/musicalbum'
 require_relative 'modules/book_module'
+require_relative 'modules/game_module'
+require_relative 'modules/author_module'
+require_relative 'modules/preserve_data'
 
 class App
   include GenreList
   include Albumlogic
   include BookModule
-  attr_accessor :item, :books, :music, :games, :genres
+  include GameModule
+  include AuthorModule
+  include PreserveData
+  attr_accessor :item, :books, :music, :games, :genres, :authors
 
   def initialize
     @books = []
     @music = []
+    @authors = []
     @games = []
     @genres = []
   end
@@ -25,7 +32,9 @@ class App
     list_music_albums
   end
 
-  def list_all_games; end
+  def list_all_games
+    list_games
+  end
 
   def list_all_genres
     list_genres(genres)
@@ -35,7 +44,9 @@ class App
     list_of_labels
   end
 
-  def list_authors; end
+  def list_authors
+    list_present_authors
+  end
 
   def add_book
     create_book
@@ -47,5 +58,6 @@ class App
 
   def add_game
     # add an author
+    create_game
   end
 end
