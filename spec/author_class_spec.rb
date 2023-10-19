@@ -4,8 +4,8 @@ require 'rspec'
 describe Author do
   before(:each) do
     @author = Author.new('FirstName', 'LastName')
-    @id = 1
-    @items = []
+    @author.id = 1
+    @author.items = []
   end
 
   describe '#initialize constructor' do
@@ -28,6 +28,12 @@ describe Author do
       allow(item).to receive(:author=)
       @author.add_item(item)
       expect(@author.items).to eq([item])
+    end
+  end
+
+  describe '#to_json method' do
+    it 'should return the object of author' do
+      expect(@author.to_json).to eq('{"id":1,"first_name":"FirstName","last_name":"LastName"}')
     end
   end
 end
