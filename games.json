@@ -1,14 +1,44 @@
 [
   {
-    "id": 819,
+    "id": 279,
+    "multiplayer": true,
+    "last_played_at": "2222",
+    "publish_date": "22222",
+    "archived": false
+  },
+  {
+    "id": 122,
     "multiplayer": true,
     "last_played_at": "1111-1-1",
     "publish_date": "2222-2-2",
-    "archived": false,
-    "author": {
-      "id": 354,
-      "first_name": "tt",
-      "last_name": "1"
-    }
+    "archived": false
+  },
+  {
+    "id": 756,
+    "multiplayer": false,
+    "last_played_at": "3333-3-3",
+    "publish_date": "4444-4-4",
+    "archived": false
+  },
+  {
+    "id": 916,
+    "multiplayer": false,
+    "last_played_at": "1111-1-1",
+    "publish_date": "2222-2-2",
+    "archived": false
+  },
+  {
+    "id": 14,
+    "multiplayer": true,
+    "last_played_at": "2222-2-2",
+    "publish_date": "5555-5-5",
+    "archived": false
+  },
+  {
+    "id": 724,
+    "multiplayer": false,
+    "last_played_at": "2222-2-2",
+    "publish_date": "3333-3-3",
+    "archived": false
   }
 ]

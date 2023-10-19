@@ -58,13 +58,13 @@ describe Game do
 
   describe '#to_json' do
     it 'JSON string of the Game object' do
-      expect(@game.to_json).to eq('{"id":1,"multiplayer":true,"last_played_at":"2019-10-17","publish_date":"2022-10-17","archived":false,"author":null}')
+      expect(@game.to_json).to eq('{"id":1,"multiplayer":true,"last_played_at":"2019-10-17","publish_date":"2022-10-17","archived":false}')
     end
 
     it 'JSON string of the empty game object' do
       game = Game.new(true, nil, nil)
       game.id = 2
-      expect(game.to_json).to eq('{"id":2,"multiplayer":true,"last_played_at":null,"publish_date":null,"archived":false,"author":null}')
+      expect(game.to_json).to eq('{"id":2,"multiplayer":true,"last_played_at":null,"publish_date":null,"archived":false}')
     end
   end
 end

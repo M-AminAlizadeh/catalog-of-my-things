@@ -6,7 +6,7 @@ class Game < Item
 
   def initialize(multiplayer, last_played_at, publish_date)
     super(publish_date)
-    @id = Random.rand(1..1000) 
+    @id = Random.rand(1..1000)
     @multiplayer = multiplayer
     @last_played_at = last_played_at
     @publish_date = publish_date
@@ -24,8 +24,7 @@ class Game < Item
       multiplayer: @multiplayer,
       last_played_at: @last_played_at,
       publish_date: @publish_date,
-      archived: @archived,
-      author: @author
+      archived: @archived
     }.to_json(option)
   end
 end

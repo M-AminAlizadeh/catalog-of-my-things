@@ -16,18 +16,20 @@ module PreserveData
             file_data = JSON.parse(File.read('games.json'))
             @games = file_data.map do |item|
               game_obj = Game.new(item['multiplayer'], item['last_played_at'], item['publish_date'])
-              author_data = item['author']
-              
-              if author_data
-                author = @authors.find { |a| a.id == author_data['id'] }
-                game_obj.author = author
+              game_obj.id = item['id']
+              author = item['author']
+              if author.nil?
+                puts "Game has no Author record"
+              else
+                game_obj.author = @authors.find { |a| a.id == author['id']}
               end
-        
               game_obj
             end
-        else
+            @games
+          else
             puts "Games data file does not exist"
-        end
+            []
+          end
     end
       
     def save_games_data
@@ -37,9 +39,7 @@ module PreserveData
     def load_authors_data
         if File.exist?('authors.json')
             file_data = JSON.parse(File.read('authors.json'))
-            @authors = file_data.map do |item| 
-                Author.new(item['first_name'], item['last_name'], item['id'])
-            end
+            @authors = file_data.map { |item| Author.new(item['first_name'], item['last_name'], item['id'])}
         else
             puts "Authors data file does not exist"
         end

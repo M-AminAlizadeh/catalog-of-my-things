@@ -14,7 +14,7 @@ class App
     @authors = []
     @games = []
 
-    load_files_data
+    
   end
 
   def list_all_books; end

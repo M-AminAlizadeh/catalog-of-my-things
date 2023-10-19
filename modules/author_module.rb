@@ -24,6 +24,8 @@ module AuthorModule
         last_name = get_user_input('Last Name: ')
         author = @authors.find { |a| a.first_name == first_name && a.last_name == last_name } || Author.new(first_name, last_name)
         @authors << author unless @authors.include?(author)
-        item.author = author
+        author.add_item(item)
+
+        author
     end
 end

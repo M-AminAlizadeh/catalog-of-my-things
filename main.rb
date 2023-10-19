@@ -1,12 +1,14 @@
 require './app'
 
 class Main
+
   def initialize
     @app = App.new
   end
   # rubocop:disable Metrics/CyclomaticComplexity
 
   def run
+    @app.load_files_data
     puts "\nCatalog of my things\n"
     loop do
       print_user_options
@@ -27,6 +29,7 @@ class Main
         puts 'Error: Invalid number.'
       end
     end
+
     @app.save_files_data
   end
   # rubocop:enable Metrics/CyclomaticComplexity
@@ -35,7 +38,7 @@ class Main
     print "\nPlease choose an option by entering a number:\n"
     print "1. List all books\n"
     print "2. List all music albums\n"
-    print '3. List all games'
+    print "3. List all games\n"
     print "4. List all music genres\n"
     print "5. List all labels\n"
     print "6. List all authors\n"

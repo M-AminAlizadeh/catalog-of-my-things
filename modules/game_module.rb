@@ -27,10 +27,11 @@ module GameModule
         last_played_at = get_user_input('Last played(yyyy-mm-dd): ')
         publish_date = get_user_input('Game publish date(yyyy-mm-dd): ')
         game = Game.new(multiplayer, last_played_at, publish_date)
+        author = add_author(game)
+        # label = add_lable(game)
+        # genre = add_genre(game)
         @games.push(game)
 
-        add_author(game)
-
-        puts 'Game Added Successfully'
+        puts "Game Added Successfully with #{author.class}"
     end
 end
