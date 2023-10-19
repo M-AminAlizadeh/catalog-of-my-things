@@ -30,7 +30,7 @@ module LabelModule
         puts '-----------------------------------'
       end
     else
-      puts "There is no label yet!"
+      puts 'There is no label yet!'
     end
   end
 end

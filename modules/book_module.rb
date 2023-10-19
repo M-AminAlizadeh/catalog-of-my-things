@@ -33,7 +33,7 @@ module BookModule
         puts '-----------------------------------'
       end
     else
-      puts "There is no books yet!"
+      puts 'There is no books yet!'
     end
   end
 end

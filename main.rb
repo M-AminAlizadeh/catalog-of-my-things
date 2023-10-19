@@ -21,7 +21,7 @@ class Main
     puts 'Welcome'
     loop do
       display_options
-      option = self.take_input
+      option = take_input
       @app.run(option)
 
       break if option == 13
