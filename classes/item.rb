@@ -25,9 +25,9 @@ class Item
     author.items.push(self) unless author.items.include?(self)
   end
 
-  def can_be_archived?
+  def self.can_be_archived?(publish_date)
     current_year = Date.today.year
-    published_year = Date.parse(@publish_date).year
+    published_year = Date.parse(publish_date).year
     check_diff = current_year - published_year
     return false unless check_diff > 10
 

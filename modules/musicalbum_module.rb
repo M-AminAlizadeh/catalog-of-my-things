@@ -1,38 +1,45 @@
 require_relative '../classes/musicalbum'
+require_relative 'genre_module'
+require 'json'
+require 'pry'
 
-module Albummodule
-  def initialize(app)
-    @app = app
-  end
+module Albumlogic
+  include GenreList
 
-  def list_all_music_albums
-    @app.music.each do |album|
+  def list_music_albums
+    music.each do |album|
       puts "Published: \"#{album.publish_date}\", Archived: #{album.archived}, On Spotify: #{album.on_spotify}"
     end
   end
 
-  def add_music_album
+  def create_music_album
     puts 'Is the album on Spotify? [Y/N]?'
     on_spotify = gets.chomp.downcase == 'y'
 
     puts 'Please enter the date of publish [YYYY-MM-DD]'
     publish_date = gets.chomp
 
-    if move_to_archive
-      archived = true
+    if MusicAlbum.can_be_archived?(publish_date, on_spotify)
+      puts 'Would you like to archive it [Y/N]?'
+      archived = gets.chomp.downcase == 'y'
       puts 'Album moved to archive.'
+
     else
       archived = false
       puts 'Album cannot be moved to archive.'
     end
 
-    music_album = MusicAlbum.new(publish_date, archived, on_spotify)
-    @app.music.push(music_album)
+    creating_genre
+    # create author
+    # creat label
+
+    music_album = MusicAlbum.new(publish_date, archived, on_spotify: on_spotify)
+    music.push(music_album)
     puts 'Music album created successfully!'
   end
 
-  def save_albums_to_json
-    @app.music.map do |album|
+  def save_album_data_to_json(music)
+    music = music.map do |album|
       {
         publish_date: album.publish_date,
         archived: album.archived,
@@ -42,19 +49,23 @@ module Albummodule
 
     filename = 'music_albums.json'
     File.open(filename, 'w') do |file|
-      file.puts(JSON.generate(@music_albums))
+      file.puts(JSON.generate(music))
     end
   end
 
-  def onloading_albums_data
-    file_name = './music_albums.json'
-    return unless File.exist?(file_name)
+  def onload_album_data(music)
+    filename = 'music_albums.json'
 
-    file = File.read(file_name)
-    data_hash = JSON.parse(file)
-    data_hash.each do |album|
-      album = MusicAlbum.new(@app.music['publish_date'], album['archived'], album['on_spotify'])
-      @app.music.push(album)
+    return unless File.exist?(filename)
+
+    file = File.read(filename)
+    file_data = JSON.parse(file)
+    file_data.each do |item|
+      music.push(MusicAlbum.new(
+                   item['publish_date'],
+                   item['archived'],
+                   item['on_spotify']
+                 ))
     end
   end
 end

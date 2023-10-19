@@ -1,4 +1,6 @@
 require_relative '../classes/genre'
+require_relative '../app'
+require 'json'
 
 module GenreList
   def initialize(app)
@@ -6,7 +8,7 @@ module GenreList
   end
 
   def creating_genre
-    puts 'Add the name of genre'
+    puts "\nAdd the name of genre"
     genre_name = gets.chomp
 
     if @app.genres.any? { |genre| genre.name == genre_name }
@@ -18,13 +20,17 @@ module GenreList
     end
   end
 
-  def list_all_genres
-    @app.genres.each do |genre|
-      puts "[#{item.class.name}], Name of genre: #{genre.name}"
+  def list_genres
+    if @app.genres.empty?
+      puts 'There are no genres added to the list.'
+    else
+      @app.genres.each do |genre|
+        puts "[#{genre.class.name}], Name of genre: #{genre.name}"
+      end
     end
   end
 
-  def save_albums_to_json
+  def save_genre_to_json
     @app.genres.map do |genre|
       {
         name: genre.name
