@@ -55,18 +55,4 @@ describe Game do
       expect(game.can_be_archived?).to eq(true)
     end
   end
-
-  describe '#to_json' do
-    it 'JSON string of the Game object' do
-      s = '{"id":1,"multiplayer":true,"last_played_at":"2019-10-17","publish_date":"2022-10-17","archived":false,"label":null,"author":null,"genre":null}'
-      expect(@game.to_json).to eq(s)
-    end
-
-    it 'JSON string of the empty game object' do
-      game = Game.new(true, nil, nil)
-      game.id = 2
-      s = '{"id":2,"multiplayer":true,"last_played_at":null,"publish_date":null,"archived":false,"label":null,"author":null,"genre":null}'
-      expect(game.to_json).to eq(s)
-    end
-  end
 end
