@@ -24,7 +24,10 @@ class Game < Item
       multiplayer: @multiplayer,
       last_played_at: @last_played_at,
       publish_date: @publish_date,
-      archived: @archived
+      archived: @archived,
+      label: @label,
+      author: @author,
+      genre: @genre
     }.to_json(option)
   end
 end

@@ -8,10 +8,31 @@ class MusicAlbum < Item
     @on_spotify = on_spotify
   end
 
-  def self.can_be_archived?(publish_date)
+  def self.can_be_archived?(publish_date, on_spotify)
     return false unless super(publish_date)
-    return false unless @on_spotify
+    return false unless on_spotify
 
     true
+  end
+
+  def to_json(*args)
+    {
+      JSON.create_id => self.class.name,
+      'id' => @id,
+      'publish_date' => @publish_date,
+      'archived' => @archived,
+      'on_spotify' => @on_spotify,
+      'label' => {
+        'title' => @label.title,
+        'color' => @label.color
+      },
+      'genre' => {
+        'name' => @genre.name
+      },
+      'author' => {
+        'first_name' => @author.first_name,
+        'last_name' => @author.last_name
+      }
+    }.to_json(*args)
   end
 end

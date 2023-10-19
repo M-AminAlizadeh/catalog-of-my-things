@@ -18,6 +18,7 @@ module LabelModule
     puts '-----------------------------------'
     puts 'successfully ADDED!!'
     puts '-----------------------------------'
+    new_label
   end
 
   def list_of_labels

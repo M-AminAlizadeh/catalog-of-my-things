@@ -23,7 +23,18 @@ class Book < Item
       'id' => @id,
       'publisher' => @publisher,
       'publish_date' => @publish_date,
-      'cover_state' => @cover_state
+      'cover_state' => @cover_state,
+      'label' => {
+        'title' => @label.title,
+        'color' => @label.color
+      },
+      'genre' => {
+        'name' => @genre.name
+      },
+      'author' => {
+        'first_name' => @author.first_name,
+        'last_name' => @author.last_name
+      }
     }.to_json(*args)
   end
 end
