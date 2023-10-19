@@ -8,11 +8,9 @@ module GenreList
     genre_name = gets.chomp
 
     if genres.any? { |genre| genre.name == genre_name }
-      puts 'Genre already exists!'
     else
       genre = Genre.new(genre_name)
       genres.push(genre)
-      puts 'Genre created successfully!'
     end
   end
 
@@ -30,7 +28,7 @@ module GenreList
       puts 'There are no genres added to the list.'
     else
       genres.each do |genre|
-        puts "[Name of class to whic this belongs], Name of genre: #{genre.name}"
+        puts "[], ID: #{genre.id}, Name of genre: #{genre.name}"
       end
     end
   end
@@ -38,7 +36,8 @@ module GenreList
   def save_genre_to_json(genres)
     genres = genres.map do |genre|
       {
-        name: genre.name
+        name: genre.name,
+        id: genre.id
       }
     end
 

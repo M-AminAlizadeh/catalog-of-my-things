@@ -8,9 +8,11 @@ module Albumlogic
 
   def list_music_albums
     music.each do |album|
-      puts "Published: \"#{album.publish_date}\", Archived: #{album.archived}, On Spotify: #{album.on_spotify}"
+      on_spotify = album.on_spotify ? 'true' : 'false'
+      puts "Published: \"#{album.publish_date}\", Archived: #{album.archived}, On Spotify: #{on_spotify}"
     end
   end
+  
 
   def create_music_album
     puts 'Is the album on Spotify? [Y/N]?'
@@ -21,9 +23,14 @@ module Albumlogic
 
     if MusicAlbum.can_be_archived?(publish_date, on_spotify)
       puts 'Would you like to archive it [Y/N]?'
-      archived = gets.chomp.downcase == 'y'
-      puts 'Album moved to archive.'
+      archive_response = gets.chomp.downcase
+      archived = archive_response == 'y'
 
+      if archived
+        puts 'Album moved to archive.'
+      else
+        puts 'Album not archived.'
+      end
     else
       archived = false
       puts 'Album cannot be moved to archive.'
