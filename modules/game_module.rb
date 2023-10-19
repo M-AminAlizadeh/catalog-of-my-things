@@ -1,5 +1,7 @@
 require_relative '../classes/game_class'
 require_relative 'author_module'
+require_relative 'label_module'
+require_relative 'genre_module'
 require 'json'
 
 module GameModule
@@ -11,14 +13,16 @@ module GameModule
   end
 
   def list_games
-    puts 'Listing Games records'
-    if @games.empty?
-      puts 'Game Records Found: 0'
-    else
-      @games.each_with_index do |item, index|
-        puts "#{index + 1} - ID: #{item.id} Multiplayer: #{item.multiplayer}"
-        puts "last_played: #{item.last_played_at}, Game Published: #{item.publish_date}"
+    if File.exist?('data/games.json')
+      File.open('data/games.json', 'r').each do |line|
+        game_data = JSON.parse(line)
+        new_game = Game.new(game_data['multiplayer'], game_data['last_played_at'], game_data['publish_date'])
+        print "ID: #{new_game.id} Multiplayer: #{new_game.multiplayer} "
+        puts "last_played: #{new_game.last_played_at}, Game Published: #{new_game.publish_date}"
+        puts '-----------------------------------'
       end
+    else
+      puts 'There is no Games yet!'
     end
   end
 
@@ -27,12 +31,18 @@ module GameModule
     multiplayer = get_user_input('Multiplayer[Y/N]: ').casecmp('Y').zero?
     last_played_at = get_user_input('Last played(yyyy-mm-dd): ')
     publish_date = get_user_input('Game publish date(yyyy-mm-dd): ')
-    game = Game.new(multiplayer, last_played_at, publish_date)
-    author = add_author(game)
-    # label = add_lable(game)
-    # genre = add_genre(game)
-    @games.push(game)
+    label = create_label
+    genre = creating_genre
+    author = add_author
 
-    puts "Game Added Successfully with #{author.class}"
+    game = Game.new(multiplayer, last_played_at, publish_date)
+    game.label = label
+    game.genre = genre
+    game.author = author
+
+    File.open('data/games.json', 'a') do |file|
+      file.puts game.to_json
+    end
+    puts 'Game Added Successfully!'
   end
 end

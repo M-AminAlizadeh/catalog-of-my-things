@@ -5,7 +5,7 @@ require_relative 'classes/musicalbum'
 require_relative 'modules/book_module'
 require_relative 'modules/game_module'
 require_relative 'modules/author_module'
-require_relative 'modules/preserve_data'
+# require_relative 'modules/preserve_data'
 
 class App
   include GenreList
@@ -13,16 +13,8 @@ class App
   include BookModule
   include GameModule
   include AuthorModule
-  include PreserveData
+  # include PreserveData
   attr_accessor :item, :books, :music, :games, :genres, :authors
-
-  def initialize
-    @books = []
-    @music = []
-    @authors = []
-    @games = []
-    @genres = []
-  end
 
   def list_all_books
     list_of_books
@@ -37,7 +29,7 @@ class App
   end
 
   def list_all_genres
-    list_genres(genres)
+    list_genres
   end
 
   def list_all_labels
@@ -57,7 +49,6 @@ class App
   end
 
   def add_game
-    # add an author
     create_game
   end
 end

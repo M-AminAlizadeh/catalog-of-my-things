@@ -1,5 +1,7 @@
 require_relative '../classes/musicalbum'
 require_relative 'genre_module'
+require_relative 'label_module'
+require_relative 'author_module'
 require 'json'
 require 'pry'
 
@@ -7,9 +9,16 @@ module Albumlogic
   include GenreList
 
   def list_music_albums
-    music.each do |album|
-      on_spotify = album.on_spotify ? 'true' : 'false'
-      puts "Published: \"#{album.publish_date}\", Archived: #{album.archived}, On Spotify: #{on_spotify}"
+    if File.exist?('data/music_albums.json')
+      File.open('data/music_albums.json', 'r').each do |line|
+        music_album_data = JSON.parse(line)
+        new_album = MusicAlbum.new(music_album_data['publish_date'], music_album_data['archived'],
+                                   music_album_data['on_spotify'])
+        puts "Published: \"#{new_album.publish_date}\", Archived: #{new_album.archived}, On Spotify: #{new_album.on_spotify}"
+        puts '-----------------------------------'
+      end
+    else
+      puts 'There is no music albums yet!'
     end
   end
 
@@ -20,7 +29,7 @@ module Albumlogic
     puts 'Please enter the date of publish [YYYY-MM-DD]'
     publish_date = gets.chomp
 
-    if MusicAlbum.can_be_archived?(publish_date)
+    if MusicAlbum.can_be_archived?(publish_date, on_spotify)
       puts 'Would you like to archive it [Y/N]?'
       archive_response = gets.chomp.downcase
       archived = archive_response == 'y'
@@ -34,44 +43,18 @@ module Albumlogic
       archived = false
       puts 'Album cannot be moved to archive.'
     end
-
-    creating_genre(genres)
-    # create author
-    # creat label
+    label = create_label
+    genre = creating_genre
+    author = add_author
 
     music_album = MusicAlbum.new(publish_date, archived, on_spotify: on_spotify)
-    music.push(music_album)
+    music_album.label = label
+    music_album.genre = genre
+    music_album.author = author
+
+    File.open('data/music_albums.json', 'a') do |file|
+      file.puts music_album.to_json
+    end
     puts 'Music album created successfully!'
-  end
-
-  def save_album_data_to_json(music)
-    music = music.map do |album|
-      {
-        publish_date: album.publish_date,
-        archived: album.archived,
-        on_spotify: album.on_spotify
-      }
-    end
-
-    filename = 'music_albums.json'
-    File.open(filename, 'w') do |file|
-      file.puts(JSON.generate(music))
-    end
-  end
-
-  def onload_album_data(music)
-    filename = 'music_albums.json'
-
-    return unless File.exist?(filename)
-
-    file = File.read(filename)
-    file_data = JSON.parse(file)
-    file_data.each do |item|
-      music.push(MusicAlbum.new(
-                   item['publish_date'],
-                   item['archived'],
-                   item['on_spotify']
-                 ))
-    end
   end
 end

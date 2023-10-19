@@ -1,19 +1,13 @@
 require './app'
-require_relative 'modules/musicalbum_module'
 
 class Main
-  include Albumlogic
-
   def initialize
     @app = App.new
   end
   # rubocop:disable Metrics/CyclomaticComplexity
 
   def run
-    @app.load_files_data
     puts "\nCatalog of my things\n"
-    @app.onload_album_data(@app.music)
-    @app.onload_genre_data(@app.genres)
     loop do
       print_user_options
       choice = gets.chomp.to_i
@@ -33,9 +27,6 @@ class Main
         puts 'Error: Invalid number.'
       end
     end
-    @app.save_album_data_to_json(@app.music)
-    @app.save_genre_to_json(@app.genres)
-    @app.save_files_data
   end
   # rubocop:enable Metrics/CyclomaticComplexity
 

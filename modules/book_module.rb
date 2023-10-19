@@ -1,5 +1,7 @@
 require_relative '../classes/book'
 require_relative 'label_module'
+require_relative 'genre_module'
+require_relative 'author_module'
 
 module BookModule
   include LabelModule
@@ -13,15 +15,20 @@ module BookModule
 
     print 'Cover state (good/bad): '
     cover_state = gets.chomp
-
-    create_label
+    label = create_label
+    genre = creating_genre
+    author = add_author
 
     new_book = Book.new(publish_date, publisher, cover_state)
+    new_book.label = label
+    new_book.genre = genre
+    new_book.author = author
 
     # Save
     File.open('data/books.json', 'a') do |file|
       file.puts new_book.to_json
     end
+    puts 'Book added successfully!'
   end
 
   def list_of_books
