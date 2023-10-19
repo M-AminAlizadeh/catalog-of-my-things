@@ -36,6 +36,7 @@ module PreserveData
       @authors = file_data.map { |item| Author.new(item['first_name'], item['last_name'], item['id']) }
     else
       puts 'Authors data file does not exist'
+      []
     end
   end
 
