@@ -13,7 +13,6 @@ class App
     @music = []
     @games = []
     @genres = []
-    @music = []
   end
 
   def list_all_books; end

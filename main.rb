@@ -2,7 +2,6 @@ require './app'
 require_relative 'modules/musicalbum_module'
 
 class Main
-
   include Albumlogic
 
   def initialize

@@ -12,7 +12,6 @@ module Albumlogic
       puts "Published: \"#{album.publish_date}\", Archived: #{album.archived}, On Spotify: #{on_spotify}"
     end
   end
-  
 
   def create_music_album
     puts 'Is the album on Spotify? [Y/N]?'

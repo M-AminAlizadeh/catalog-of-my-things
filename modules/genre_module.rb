@@ -22,8 +22,8 @@ module GenreList
 
     # choice = gets.chomp.to_i
 
-    # case choice 
-    # when 1 then 
+    # case choice
+    # when 1 then
     if genres.empty?
       puts 'There are no genres added to the list.'
     else
